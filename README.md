@@ -1,3 +1,6 @@
+## Easy HtmlQ
+A minor change to HtmlQ to allow it to work with Firebase
+
 ## HtmlQ
 
 by [aproxima Gesellschaft für Markt- und Sozialforschung Weimar](http://www.aproxima.de/).
