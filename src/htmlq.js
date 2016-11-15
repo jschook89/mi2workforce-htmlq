@@ -13,7 +13,7 @@ function xml2json(xml) {
 function transformTextToHtml($sce, text, parseHtml) {
     if (parseHtml) {
         text = text.replace(/{br}/g, '<br>');
-        text = text.replace(/\{/g, '<').replace(/\}/g, '>')
+        text = text.replace(/\{/g, '<').replace(/\}/g, '>');
     }
     return $sce.trustAsHtml(text);
 }
@@ -27,7 +27,7 @@ function getOrderedStatementsFromGrid(sortedStatements) {
             }
         }
     }
-    ret.sort(function(a, b) {
+    ret.sort(function (a, b) {
         return parseInt(a._id, 10) - parseInt(b._id, 10);
     });
     return ret;
@@ -47,13 +47,13 @@ function getRatingForStatement(map, statement, sortedStatements) {
 //@ http://jsfromhell.com/array/shuffle [v1.0]
 // http://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array-in-javascript
 function shuffleInPlace(o) {
-    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x) {};
+    for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x) {};
     return o;
 };
 
 angular.module('app', ['ui.router', 'ui.bootstrap'])
 
-.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('error', {
             template: '<div class="container"><div class="row" style="margin-top: 35px;"><div class="col-xs-8 col-xs-offset-2 alert alert-danger"><p>An error occured while opening your survey. If you tried to open index.html via the file:// protocol, please use Firefox or another browser that allows XML HTTP Requests to local files.</p></div></div></div>'
@@ -63,10 +63,10 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             controller: 'RootCtrl',
             templateUrl: 'templates/root.html',
             resolve: {
-                'language': ['$http', '$sce', function($http, $sce) {
+                'language': ['$http', '$sce', function ($http, $sce) {
                     return $http.get('settings/language.xml', {
                         transformResponse: xml2json
-                    }).then(function(data, status) {
+                    }).then(function (data, status) {
                         var parseHtml = data.data.language._htmlParse === 'true';
                         var items = jsonPath.eval(data, '$.data.language.item')[0];
                         var ret = {};
@@ -80,30 +80,30 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
                         return ret;
                     });
                 }],
-                'statements': ['$http', '$sce', function($http, $sce) {
+                'statements': ['$http', '$sce', function ($http, $sce) {
                     return $http.get('settings/statements.xml', {
                         transformResponse: xml2json
-                    }).then(function(data, status) {
+                    }).then(function (data, status) {
                         var parseHtml = data.data.statements._htmlParse === 'true';
-                        return _.map(data.data.statements.statement, function(statement) {
+                        return _.map(data.data.statements.statement, function (statement) {
                             return {
                                 _id: statement._id,
                                 __text: transformTextToHtml($sce, statement.__text, parseHtml)
-                            }
+                            };
                         });
                     });
                 }],
-                'map': ['$http', function($http) {
+                'map': ['$http', function ($http) {
                     return $http.get('settings/map.xml', {
                         transformResponse: xml2json
-                    }).then(function(data, status) {
+                    }).then(function (data, status) {
                         return data.data.map;
                     });
                 }],
-                'config': ['$http', function($http) {
+                'config': ['$http', function ($http) {
                     return $http.get('settings/config.xml', {
                         transformResponse: xml2json
-                    }).then(function(data, status) {
+                    }).then(function (data, status) {
                         var items = jsonPath.eval(data, '$.data.config.item')[0];
                         var ret = {};
                         for (var i = 0; i < items.length; i++) {
@@ -113,9 +113,9 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
                         return ret;
                     });
                 }],
-                'configXml': ['$http', function($http) {
+                'configXml': ['$http', function ($http) {
                     return $http.get('settings/config.xml')
-                        .then(function(data, status) {
+                        .then(function (data, status) {
                             return data.data;
                         });
                 }]
@@ -126,13 +126,13 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             templateUrl: 'templates/empty.html',
             controller: 'WelcomeCtrl',
             resolve: {
-                messageHead: ['language', function(language) {
+                messageHead: ['language', function (language) {
                     return language.welcomeHead;
                 }],
-                message: ['language', function(language) {
+                message: ['language', function (language) {
                     return language.welcomeText;
                 }],
-                'userCodeParam': ['$stateParams', function($stateParams) {
+                'userCodeParam': ['$stateParams', function ($stateParams) {
                     return $stateParams.userCode;
                 }]
             },
@@ -151,10 +151,10 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             templateUrl: 'templates/empty.html',
             controller: 'MessageCtrl',
             resolve: {
-                messageHead: ['language', function(language) {
+                messageHead: ['language', function (language) {
                     return language.introHead;
                 }],
-                message: ['language', function(language) {
+                message: ['language', function (language) {
                     return language.introText;
                 }]
             },
@@ -166,10 +166,10 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             templateUrl: 'templates/step1.html',
             controller: 'Step1Ctrl',
             resolve: {
-                messageHead: ['language', function(language) {
+                messageHead: ['language', function (language) {
                     return language.step1Head;
                 }],
-                message: ['language', function(language) {
+                message: ['language', function (language) {
                     return language.step1Text;
                 }]
             },
@@ -181,10 +181,10 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             templateUrl: 'templates/step2.html',
             controller: 'Step2Ctrl',
             resolve: {
-                messageHead: ['language', function(language) {
+                messageHead: ['language', function (language) {
                     return language.step2Head;
                 }],
-                message: ['language', function(language) {
+                message: ['language', function (language) {
                     return language.step2Text;
                 }]
             },
@@ -197,10 +197,10 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             templateUrl: 'templates/step3.html',
             controller: 'Step3Ctrl',
             resolve: {
-                messageHead: ['language', function(language) {
+                messageHead: ['language', function (language) {
                     return language.step3Head;
                 }],
-                message: ['language', function(language) {
+                message: ['language', function (language) {
                     return language.step3Text;
                 }]
             },
@@ -212,10 +212,10 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             templateUrl: 'templates/step4.html',
             controller: 'Step4Ctrl',
             resolve: {
-                messageHead: ['language', function(language) {
+                messageHead: ['language', function (language) {
                     return language.step4Head;
                 }],
-                message: ['language', function(language) {
+                message: ['language', function (language) {
                     return language.step4Text;
                 }]
             },
@@ -227,10 +227,10 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             templateUrl: 'templates/step5.html',
             controller: 'Step5Ctrl',
             resolve: {
-                messageHead: ['language', function(language) {
+                messageHead: ['language', function (language) {
                     return language.step5Head;
                 }],
-                message: ['language', function(language) {
+                message: ['language', function (language) {
                     return language.step5Text;
                 }]
             },
@@ -258,7 +258,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     $urlRouterProvider.otherwise('/');
 }])
 
-.controller('RootCtrl', ['language', 'statements', 'map', 'config', 'configXml', 'SortedStatements', 'Survey', 'Duration', '$sce', '$scope', '$state', '$log', function(language, statements, map, config, configXml, SortedStatements, Survey, Duration, $sce, $scope, $state, $log) {
+.controller('RootCtrl', ['language', 'statements', 'map', 'config', 'configXml', 'SortedStatements', 'Survey', 'Duration', '$sce', '$scope', '$state', '$log', function (language, statements, map, config, configXml, SortedStatements, Survey, Duration, $sce, $scope, $state, $log) {
     $scope.language = language;
     $scope.statements = statements;
     $scope.map = map;
@@ -266,7 +266,9 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     $scope.configXml = configXml;
     $scope.duration = Duration;
 
-    var longestColumn = _.last(_.sortBy(map.column, function(column){ return parseInt(column.__text, 10); }));
+    var longestColumn = _.last(_.sortBy(map.column, function (column) {
+        return parseInt(column.__text, 10);
+    }));
     $scope.cellHeight = 300 / parseInt(longestColumn.__text, 10);
 
     $scope.textAlignRight = (config.textAlign === 'right');
@@ -338,21 +340,21 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
         }
     }
 
-    $scope.help = function() {
+    $scope.help = function () {
         // broadcast
         $scope.$broadcast('help');
     };
 
-    $scope.next = function() {
+    $scope.next = function () {
         // broadcast
         $scope.$broadcast('next');
     };
 
-    $scope.progressStyle = function() {
+    $scope.progressStyle = function () {
         return '' + Math.round($scope.progress() * 100) + '%';
-    }
+    };
 
-    $scope.progress = function() {
+    $scope.progress = function () {
         var total = 0;
         var current = 0;
 
@@ -422,15 +424,15 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
         return current / total;
     };
 
-    $scope.hasHelp = function() {
+    $scope.hasHelp = function () {
         return $state.current.hasHelp;
     };
 
-    $scope.canGoBack = function() {
+    $scope.canGoBack = function () {
         return !$state.current.noBackButton;
     };
 
-    window.onbeforeunload = function() {
+    window.onbeforeunload = function () {
         if ($state.current.warnOnClose == true) {
             return language.leaveSiteWarning || '';
         } else {
@@ -439,22 +441,22 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     };
 }])
 
-.controller('MessageCtrl', ['message', 'messageHead', 'MessageModal', 'language', 'config', '$scope', '$state', function(message, messageHead, MessageModal, language, config, $scope, $state) {
+.controller('MessageCtrl', ['message', 'messageHead', 'MessageModal', 'language', 'config', '$scope', '$state', function (message, messageHead, MessageModal, language, config, $scope, $state) {
     var modal = MessageModal.show(messageHead, message, config.textAlign, language.btnContinue);
 
-    modal.result.then(function() {
+    modal.result.then(function () {
         $state.go($state.current.next);
     });
 }])
 
-.controller('WelcomeCtrl', ['message', 'messageHead', 'MessageModal', 'UserCode', 'userCodeParam', 'language', 'config', '$scope', '$state', function(message, messageHead, MessageModal, UserCode, userCodeParam, language, config, $scope, $state) {
+.controller('WelcomeCtrl', ['message', 'messageHead', 'MessageModal', 'UserCode', 'userCodeParam', 'language', 'config', '$scope', '$state', function (message, messageHead, MessageModal, UserCode, userCodeParam, language, config, $scope, $state) {
     var modal = MessageModal.show(messageHead, message, config.textAlign, language.btnContinue);
 
     if (userCodeParam && userCodeParam.length > 0) {
         UserCode.userCode = userCodeParam;
     }
 
-    modal.result.then(function() {
+    modal.result.then(function () {
         // skip login if it's not active
         if (!config.loginrequired || config.loginrequired === 'false') {
             $state.go('root.introduction');
@@ -464,7 +466,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     });
 }])
 
-.factory('SortedStatements', [function() {
+.factory('SortedStatements', [function () {
     return {
         list: [],
         disagree: [],
@@ -474,10 +476,10 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     };
 }])
 
-.factory('Survey', [function() {
+.factory('Survey', [function () {
     return {
         formElements: [],
-        formElementToString: function(formElement) {
+        formElementToString: function (formElement) {
             if (formElement.inputType === 'checkbox') {
                 var ret = [];
                 for (var i = 0; i < formElement.value.length; i++) {
@@ -493,34 +495,34 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     };
 }])
 
-.factory('Duration', [function() {
+.factory('Duration', [function () {
     return [0, 0, 0, 0, 0];
 }])
 
-.factory('UserCode', [function() {
+.factory('UserCode', [function () {
     return {
         userCode: null
     };
 }])
 
-.directive('trackDuration', ['$interval', function($interval) {
+.directive('trackDuration', ['$interval', function ($interval) {
     return {
         restrict: 'A',
         scope: {
             model: '=trackDuration'
         },
-        link: function(scope, element, attrs) {
-            element.on('$destroy', function() {
+        link: function (scope, element, attrs) {
+            element.on('$destroy', function () {
                 $interval.cancel(timeoutId);
             });
-            var timeoutId = $interval(function() {
+            var timeoutId = $interval(function () {
                 scope.model += 0.1;
             }, 100);
         }
     };
 }])
 
-.directive('droppable', ['$log', function($log) {
+.directive('droppable', ['$log', function ($log) {
     return {
         restrict: 'A',
         scope: {
@@ -529,16 +531,21 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             droppableCategory: '@',
             afterDrop: '&'
         },
-        link: function(scope, element, attrs) {
+        link: function (scope, element, attrs) {
             $(element).droppable({
                 hoverClass: 'active',
                 tolerance: 'pointer',
-                drop: function(event, ui) {
+                drop: function (event, ui) {
                     var dragElement = angular.element(ui.draggable.get()).isolateScope();
-                    scope.$apply(function() {
-                        scope.onDroppableReceive({$statement: dragElement.statement()});
+                    scope.$apply(function () {
+                        scope.onDroppableReceive({
+                            $statement: dragElement.statement()
+                        });
                         scope.model.unshift(dragElement.statement());
-                        scope.afterDrop({$statement: dragElement.statement(), $category: scope.droppableCategory});
+                        scope.afterDrop({
+                            $statement: dragElement.statement(),
+                            $category: scope.droppableCategory
+                        });
                     });
                 }
             });
@@ -547,13 +554,13 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
 }])
 
 
-.directive('draggableStatementFirst', [function() {
+.directive('draggableStatementFirst', [function () {
     return {
         restrict: 'A',
         scope: {
             statement: '&draggableStatementFirst'
         },
-        link: function(scope, element, attrs) {
+        link: function (scope, element, attrs) {
             $(element).draggable({
                 opacity: 0.5,
                 scroll: false,
@@ -564,7 +571,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     };
 }])
 
-.directive('draggableStatement', [function() {
+.directive('draggableStatement', [function () {
     return {
         restrict: 'A',
         scope: {
@@ -573,25 +580,28 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             cloneOnDrag: '&',
             smallFont: '&'
         },
-        link: function(scope, element, attrs) {
+        link: function (scope, element, attrs) {
             scope.initialStatement = scope.statement();
 
             var options = {
                 scroll: false,
                 appendTo: '#step2',
                 stack: '.draggable, .swappable',
-                revert: function(dropTarget) {
+                revert: function (dropTarget) {
                     if ($(dropTarget).attr('id') === 'step2') return false;
                     if (!$(dropTarget).hasClass('cell')) return true;
                     var statementOnDroppable = angular.element(dropTarget).scope().cell.statement;
                     var isOccupiedByAnotherStatement = (statementOnDroppable && statementOnDroppable._id !== scope.initialStatement._id);
                     return isOccupiedByAnotherStatement;
                 },
-                cursorAt: { top: 35, left: 50 }
+                cursorAt: {
+                    top: 35,
+                    left: 50
+                }
             };
 
             if (!scope.cloneOnDrag || scope.cloneOnDrag()) {
-                options.helper = function(event) {
+                options.helper = function (event) {
                     var ret = $(this).clone().addClass('dragging-onto-grid');
                     if (scope.smallFont && scope.smallFont() === 'true') {
                         ret.addClass('small-font')
@@ -605,7 +615,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     };
 }])
 
-.directive('swappableStatement', ['$log', function($log) {
+.directive('swappableStatement', ['$log', function ($log) {
     return {
         restrict: 'A',
         scope: {
@@ -613,8 +623,8 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             initialCell: '&swappableStatementCell',
             swappable: '@'
         },
-        templateUrl: 'templates/_swappable_statement.html',
-        link: function(scope, element, attrs) {
+        templateUrl: 'templates/dropEventText.html',
+        link: function (scope, element, attrs) {
             // save initial statement in case the binding changes through dom manipulation
             scope.initialStatement = scope.statement();
             scope.cell = scope.initialCell();
@@ -622,14 +632,14 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             $(element).draggable({
                 stack: '.swappable, .draggable',
                 revert: 'invalid',
-                start: function(event, ui) {
+                start: function (event, ui) {
                     $log.info('DRAG START EVENT');
 
                     // remember drag start position
                     $(this).prop('startPos', $(this).offset());
 
                     // DRAG OUT OF CELL
-                    scope.$apply(function() {
+                    scope.$apply(function () {
                         if (scope.cell) {
                             scope.cell.statement = null;
                         }
@@ -644,15 +654,15 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             $(element).droppable({
                 accept: '.swappable',
                 greedy: true,
-                over: function(event, ui) {
+                over: function (event, ui) {
                     ui.draggable.addClass('swap-possible');
                 },
-                out: function(event, ui) {
+                out: function (event, ui) {
                     ui.draggable.removeClass('swap-possible');
                 },
-                drop: function(event, ui) {
+                drop: function (event, ui) {
                     // SWAP TWO DRAGGABLES
-                    scope.$apply(function() {
+                    scope.$apply(function () {
                         $log.info('SWAP EVENT');
                         var draggedElement = angular.element(ui.draggable.get()).isolateScope();
                         var self = scope;
@@ -703,7 +713,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     };
 }])
 
-.directive('swappableDroppable', ['$compile', '$log', function($compile, $log) {
+.directive('swappableDroppable', ['$compile', '$log', function ($compile, $log) {
     return {
         restrict: 'A',
         scope: {
@@ -712,7 +722,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             dynamicallyCreateInitialStatement: "@",
             helperWidth: '@'
         },
-        link: function(scope, element, attrs) {
+        link: function (scope, element, attrs) {
             scope.cell = scope.initialCell();
 
             function addStatementDiv(outerScope, reposition) {
@@ -722,7 +732,10 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
                 $(element).append(el);
                 if (reposition) {
                     var targetOffset = $(element).offset();
-                    $(el).offset({top: targetOffset.top + 3, left: targetOffset.left + 3});
+                    $(el).offset({
+                        top: targetOffset.top + 3,
+                        left: targetOffset.left + 3
+                    });
                 }
             }
 
@@ -734,7 +747,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             $(element).droppable({
                 hoverClass: "droppable-active",
                 greedy: true,
-                drop: function(event, ui) {
+                drop: function (event, ui) {
                     $log.info('DROP EVENT');
                     // don't accept if we're already occupied
                     if (scope.cell.statement) {
@@ -745,7 +758,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
                     var dragElement = angular.element(ui.draggable.get()).isolateScope();
 
                     // we're empty, add dragged statement to cell
-                    scope.$apply(function() {
+                    scope.$apply(function () {
                         // set statement in cell
                         scope.cell.statement = dragElement.initialStatement;
 
@@ -765,9 +778,11 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
 
                     // if the dragged statement was a draggable and not a swappable, add a div that can be dragged around in the grid.
                     if (ui.draggable.attr('draggable-statement')) {
-                        scope.$apply(function() {
+                        scope.$apply(function () {
                             addStatementDiv(element.scope(), true);
-                            scope.onReceivedStatementFromCategories({$statement: dragElement.initialStatement});
+                            scope.onReceivedStatementFromCategories({
+                                $statement: dragElement.initialStatement
+                            });
                         });
                     }
 
@@ -782,19 +797,19 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     };
 }])
 
-.directive('droppableBackground', ['$log', '$compile', function($log, $compile) {
+.directive('droppableBackground', ['$log', '$compile', function ($log, $compile) {
     return {
         restrict: 'A',
         scope: {
             onDrop: '&'
         },
-        link: function(scope, element, attrs) {
+        link: function (scope, element, attrs) {
             $(element).droppable({
-                drop: function(event, ui) {
+                drop: function (event, ui) {
                     $log.info('DROP ON BG EVENT');
                     var dragElement = angular.element(ui.draggable.get()).isolateScope();
 
-                    scope.$apply(function() {
+                    scope.$apply(function () {
                         if (ui.helper.hasClass('dragging-onto-grid')) {
                             if (!dragElement.cloneOnDrag()) return;
                             // we're currently dragging a statement out of the categories onto the canvas
@@ -808,7 +823,9 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
                             }
                             $(el).appendTo('#step2');
                             $(el).offset(ui.helper.offset());
-                            scope.onDrop({$statement: s.statement});
+                            scope.onDrop({
+                                $statement: s.statement
+                            });
                         } else {
                             // the statement was already in the grid and is now being dropped on the canvas
                             dragElement.cell = null;
@@ -820,7 +837,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     }
 }])
 
-.controller('LoginCtrl', ['config', 'language', 'UserCode', '$http', '$scope', '$state', function(config, language, UserCode, $http, $scope, $state) {
+.controller('LoginCtrl', ['config', 'language', 'UserCode', '$http', '$scope', '$state', function (config, language, UserCode, $http, $scope, $state) {
     function getParameterByName(queryString, name) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -830,13 +847,19 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
 
     function loginViaGet(code) {
         return $http.get(config.loginUrl, {
-            params: {uid: code}
+            params: {
+                uid: code
+            }
         });
     };
 
     function loginViaPost(code) {
-        return $http.post(config.loginUrl, $.param({uid: code}), {
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        return $http.post(config.loginUrl, $.param({
+            uid: code
+        }), {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         });
     }
 
@@ -847,28 +870,26 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
         } else {
             promise = loginViaPost(code);
         }
-        return (promise.
-            success(function(data, status) {
-                // in FireFox, if you open HtmlQ via the file:// protocol and the POST or GET to the default path
-                // just returns the source code of the PHP script. In this case we assume failure even though the response is HTTP 200
-                if (data.indexOf("<?php") === 0) {
-                    $scope.error = language.loginNoConnection;
-                    throw '';
-                };
-            }).
-            error(function() {
+        return (promise.success(function (data, status) {
+            // in FireFox, if you open HtmlQ via the file:// protocol and the POST or GET to the default path
+            // just returns the source code of the PHP script. In this case we assume failure even though the response is HTTP 200
+            if (data.indexOf("<?php") === 0) {
                 $scope.error = language.loginNoConnection;
-            }));
+                throw '';
+            };
+        }).error(function () {
+            $scope.error = language.loginNoConnection;
+        }));
     };
 
-    $scope.login = function(code) {
+    $scope.login = function (code) {
         if (!code || code.length === 0) {
             $scope.error = language.loginNoInput;
             return;
         }
 
         if (config.loginUrl && config.loginUrl.length > 0) {
-            loginViaHttp(code).then(function(response) {
+            loginViaHttp(code).then(function (response) {
                 var status = getParameterByName(response.data, 'status');
                 if (parseInt(status, 10) === 1) {
                     $state.go('root.introduction');
@@ -893,27 +914,27 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     }
 }])
 
-.controller('Step1Ctrl', ['message', 'messageHead', 'language', 'config', 'SortedStatements', 'MessageModal', '$rootScope', '$scope', '$state', function(message, messageHead, language, config, SortedStatements, MessageModal, $rootScope, $scope, $state) {
-    $scope.help = function() {
+.controller('Step1Ctrl', ['message', 'messageHead', 'language', 'config', 'SortedStatements', 'MessageModal', '$rootScope', '$scope', '$state', function (message, messageHead, language, config, SortedStatements, MessageModal, $rootScope, $scope, $state) {
+    $scope.help = function () {
         MessageModal.show(messageHead, message, config.textAlign, language.btnContinue);
     };
     $scope.$on('help', $scope.help)
-    $scope.next = function() {
+    $scope.next = function () {
         $state.go('root.step2');
     };
     $scope.$on('next', $scope.next);
 
     $scope.sortedStatements = SortedStatements;
 
-    $scope.hasNoCategory = function(statement) {
+    $scope.hasNoCategory = function (statement) {
         return !statement.category;
     }
 
-    $scope.allCards = function() {
+    $scope.allCards = function () {
         return SortedStatements.list.length + SortedStatements.agree.length + SortedStatements.neutral.length + SortedStatements.disagree.length + getOrderedStatementsFromGrid(SortedStatements).length;
     }
 
-    $scope.sortedCards = function() {
+    $scope.sortedCards = function () {
         return SortedStatements.agree.length + SortedStatements.neutral.length + SortedStatements.disagree.length + getOrderedStatementsFromGrid(SortedStatements).length;
     }
 
@@ -925,7 +946,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
         }
     }
 
-    $scope.removeFromSortedStatements = function(statement) {
+    $scope.removeFromSortedStatements = function (statement) {
         // remove from all other lists
         removeStatementFromArray(SortedStatements.list, statement);
         removeStatementFromArray(SortedStatements.agree, statement);
@@ -933,7 +954,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
         removeStatementFromArray(SortedStatements.neutral, statement);
     }
 
-    $scope.afterDrop = function(statement, category) {
+    $scope.afterDrop = function (statement, category) {
         statement.category = category;
         nextIfComplete();
     }
@@ -955,7 +976,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     }
     nextIfComplete();
 
-    $scope.$on('my:keyup', function(event, keyEvent) {
+    $scope.$on('my:keyup', function (event, keyEvent) {
         var card = $('#statements > div.draggable:first-child');
         var category = null;
         if (keyEvent.keyCode === 49) {
@@ -977,13 +998,13 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     });
 }])
 
-.controller('Step2Ctrl', ['message', 'messageHead', 'language', 'statements', 'map', 'config', 'SortedStatements', 'MessageModal', '$scope', '$rootScope', '$state', function(message, messageHead, language, statements, map, config, SortedStatements, MessageModal, $scope, $rootScope, $state) {
-    $scope.help = function() {
+.controller('Step2Ctrl', ['message', 'messageHead', 'language', 'statements', 'map', 'config', 'SortedStatements', 'MessageModal', '$scope', '$rootScope', '$state', function (message, messageHead, language, statements, map, config, SortedStatements, MessageModal, $scope, $rootScope, $state) {
+    $scope.help = function () {
         MessageModal.show(messageHead, message, config.textAlign, language.btnContinue);
     };
     $scope.help();
     $scope.$on('help', $scope.help)
-    $scope.next = function() {
+    $scope.next = function () {
         $rootScope.goToNextPage(config, 2);
     };
     $scope.$on('next', $scope.next);
@@ -996,7 +1017,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
         col.cells = Array(parseInt(col.__text, 10));
     }
 
-    $scope.removeStatement = function(statement) {
+    $scope.removeStatement = function (statement) {
         for (var i = 0; i < SortedStatements.agree.length; i++) {
             if (SortedStatements.agree[i]._id === statement._id) {
                 SortedStatements.agree.splice(i, 1);
@@ -1016,7 +1037,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
         }
     };
 
-    $scope.done = function() {
+    $scope.done = function () {
         var ct = 0;
         for (var i = 0; i < SortedStatements.grid.length; i++) {
             for (var j = 0; j < SortedStatements.grid[i].length; j++) {
@@ -1029,13 +1050,13 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     };
 }])
 
-.controller('Step3Ctrl', ['message', 'messageHead', 'language', 'statements', 'map', 'config', 'SortedStatements', 'MessageModal', '$scope', '$rootScope', '$state', function(message, messageHead, language, statements, map, config, SortedStatements, MessageModal, $scope, $rootScope, $state) {
-    $scope.help = function() {
+.controller('Step3Ctrl', ['message', 'messageHead', 'language', 'statements', 'map', 'config', 'SortedStatements', 'MessageModal', '$scope', '$rootScope', '$state', function (message, messageHead, language, statements, map, config, SortedStatements, MessageModal, $scope, $rootScope, $state) {
+    $scope.help = function () {
         MessageModal.show(messageHead, message, config.textAlign, language.btnContinue);
     };
     $scope.help();
     $scope.$on('help', $scope.help)
-    $scope.next = function() {
+    $scope.next = function () {
         $rootScope.goToNextPage(config, 3);
     };
     $scope.$on('next', $scope.next);
@@ -1045,7 +1066,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
         col.cells = Array(parseInt(col.__text, 10));
     }
 
-    $scope.done = function() {
+    $scope.done = function () {
         var ct = 0;
         for (var i = 0; i < SortedStatements.grid.length; i++) {
             for (var j = 0; j < SortedStatements.grid[i].length; j++) {
@@ -1058,13 +1079,13 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     };
 }])
 
-.controller('Step4Ctrl', ['message', 'messageHead', 'language', 'statements', 'map', 'config', 'SortedStatements', 'MessageModal', '$scope', '$rootScope', '$state', function(message, messageHead, language, statements, map, config, SortedStatements, MessageModal, $scope, $rootScope, $state) {
-    $scope.help = function() {
+.controller('Step4Ctrl', ['message', 'messageHead', 'language', 'statements', 'map', 'config', 'SortedStatements', 'MessageModal', '$scope', '$rootScope', '$state', function (message, messageHead, language, statements, map, config, SortedStatements, MessageModal, $scope, $rootScope, $state) {
+    $scope.help = function () {
         MessageModal.show(messageHead, message, config.textAlign, language.btnContinue);
     };
     $scope.help();
     $scope.$on('help', $scope.help)
-    $scope.next = function() {
+    $scope.next = function () {
         for (var i = 0; i < $scope.disagreeColumn.length; i++) {
             if (!$scope.disagreeColumn[i].statement.comment) {
                 $scope.disagreeColumn[i].statement.comment = ' ';
@@ -1089,13 +1110,13 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     $scope.agreeColumn = SortedStatements.grid[SortedStatements.grid.length - 1];
 }])
 
-.controller('Step5Ctrl', ['message', 'messageHead', 'language', 'config', 'configXml', 'MessageModal', 'Survey', '$scope', '$rootScope', '$state', function(message, messageHead, language, config, configXml, MessageModal, Survey, $scope, $rootScope, $state) {
-    $scope.help = function() {
+.controller('Step5Ctrl', ['message', 'messageHead', 'language', 'config', 'configXml', 'MessageModal', 'Survey', '$scope', '$rootScope', '$state', function (message, messageHead, language, config, configXml, MessageModal, Survey, $scope, $rootScope, $state) {
+    $scope.help = function () {
         MessageModal.show(messageHead, message, config.textAlign, language.btnContinue);
     };
     $scope.help();
     $scope.$on('help', $scope.help)
-    $scope.next = function() {
+    $scope.next = function () {
         if ($scope.isSurveyComplete()) {
             $scope.error = false;
             $rootScope.goToNextPage(config, 5);
@@ -1127,14 +1148,14 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
         }
     }
 
-    $scope.isSurveyComplete = function() {
+    $scope.isSurveyComplete = function () {
         for (var i = 0; i < Survey.formElements.length; i++) {
             var formElement = Survey.formElements[i];
             if (formElement.required) {
                 if (formElement.inputType === 'text' || formElement.inputType === 'textarea') {
                     if (!formElement.value || formElement.value.length === 0) {
                         return false;
-                     }
+                    }
 
                     if (formElement.restricted && isNaN(formElement.value)) {
                         return false;
@@ -1154,7 +1175,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     }
 }])
 
-.controller('SubmitCtrl', ['language', 'config', 'map', 'SortedStatements', 'Survey', 'Duration', 'UserCode', '$http', '$scope', '$state', '$stateParams', '$log', function(language, config, map, SortedStatements, Survey, Duration, UserCode, $http, $scope, $state, $stateParams, $log) {
+.controller('SubmitCtrl', ['language', 'config', 'map', 'SortedStatements', 'Survey', 'Duration', 'UserCode', '$http', '$scope', '$state', '$stateParams', '$log', function (language, config, map, SortedStatements, Survey, Duration, UserCode, $http, $scope, $state, $stateParams, $log) {
     function makeSortString(sortedStatements) {
         var sorted = [];
         for (var i = 0; i < sortedStatements.length; i++) {
@@ -1177,9 +1198,15 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             datetime: $.format.date(new Date(), 'yyyy-MM-dd HH:mm:ss'),
             sort: sorted.join('|'),
             name: config['studyTitle'] + ' ' + config['_version'],
-            npos: _.filter(statements, function(s) { return s.category === 'agree'; }).length,
-            nneu: _.filter(statements, function(s) { return s.category === 'neutral'; }).length,
-            nneg: _.filter(statements, function(s) { return s.category === 'disagree'; }).length
+            npos: _.filter(statements, function (s) {
+                return s.category === 'agree';
+            }).length,
+            nneu: _.filter(statements, function (s) {
+                return s.category === 'neutral';
+            }).length,
+            nneg: _.filter(statements, function (s) {
+                return s.category === 'disagree';
+            }).length
         };
 
         if (UserCode.userCode && UserCode.userCode.length > 0) {
@@ -1209,45 +1236,76 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
         return $http.get(config['submitUrl'], {
             params: makeParamsObject()
         });
-    };
+    }
 
     function submitViaPost() {
         return $http.post(config['submitUrl'], $.param(makeParamsObject()), {
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         });
     }
 
-    $scope.submitViaHttp = function() {
+    function submitViaFirebase() {
+        var results = makeParamsObject();
+
+        for (var i in results) {
+            if (results[i] === null || results[i] === undefined) {
+                results[i] = "no_response";
+            }
+        }
+        rootRef.push(results, function (error) {
+            if (error) {
+                $stateParams.retry = 1;
+                $state.go('root.submit', {
+                    retry: $stateParams.retry
+                });
+            } else {
+                $state.go('root.thanks');
+            }
+        });
+    }
+
+    $scope.submitViaHttp = function () {
         var promise;
         if (config['submitUrlMethod'].toLowerCase() === 'get') {
             promise = submitViaGet();
-        } else {
+        } else if (config['submitUrlMethod'].toLowerCase() === 'post') {
             promise = submitViaPost();
+        } else {
+            submitViaFirebase();
+            return;
         }
+
         promise.
-            success(function(data, status) {
-                // in FireFox, if you open HtmlQ via the file:// protocol and the POST or GET to the default path
-                // just returns the source code of the PHP script. In this case we assume failure even though the response is HTTP 200
-                if (data.indexOf("<?php") === 0) {
-                    $state.go('root.submit', {retry: $stateParams.retry ? parseInt($stateParams.retry, 10) + 1 : 1});
-                } else {
-                    $state.go('root.thanks');
-                }
-            }).
-            error(function() {
-                $state.go('root.submit', {retry: $stateParams.retry ? parseInt($stateParams.retry, 10) + 1 : 1});
+        success(function (data, status) {
+            if (data.indexOf("<?php") === 0) {
+                $state.go('root.submit', {
+                    retry: $stateParams.retry ? parseInt($stateParams.retry, 10) + 1 : 1
+                });
+            } else {
+                $state.go('root.thanks');
+            }
+        }).
+        error(function () {
+            $state.go('root.submit', {
+                retry: $stateParams.retry ? parseInt($stateParams.retry, 10) + 1 : 1
             });
+
+        });
     };
 
     $scope.firstTry = (!$stateParams.retry || $stateParams.retry === 0);
     $scope.mailReceiver = config['submitMail'];
     $scope.mailSubject = 'HtmlQ/' + config['studyTitle'] + ' ' + config['_version'];
 
-    var createMailText = function() {
+    var createMailText = function () {
         var params = makeParamsObject();
+
         function strFromParam(key) {
             return key + ': ' + (params[key] || '') + '\n';
         };
+
         function strWithPrefix(prefix) {
             var matchingKeys = keysWithPrefix(prefix);
             matchingKeys.sort();
@@ -1257,6 +1315,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             }
             return ret.join('');
         }
+
         function keysWithPrefix(prefix) {
             var ret = [];
             for (var key in params) {
@@ -1269,7 +1328,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
             return ret;
         }
         var ret = language['mailBody'] + '\n\n' +
-            strFromParam('uid') + 
+            strFromParam('uid') +
             strFromParam('sort') +
             strFromParam('nneg') +
             strFromParam('nneu') +
@@ -1286,7 +1345,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     $scope.mailText = createMailText();
 }])
 
-.controller('PrintCtrl', ['language', 'config', 'map', 'SortedStatements', 'Survey', 'Duration', 'UserCode', '$timeout', '$scope', '$state', function(language, config, map, SortedStatements, Survey, Duration, UserCode, $timeout, $scope, $state) {
+.controller('PrintCtrl', ['language', 'config', 'map', 'SortedStatements', 'Survey', 'Duration', 'UserCode', '$timeout', '$scope', '$state', function (language, config, map, SortedStatements, Survey, Duration, UserCode, $timeout, $scope, $state) {
     var statements = getOrderedStatementsFromGrid(SortedStatements);
 
     $scope.userCode = UserCode;
@@ -1297,41 +1356,46 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     $scope.disagreeColumn = SortedStatements.grid[0];
     $scope.agreeColumn = SortedStatements.grid[SortedStatements.grid.length - 1];
 
-    $scope.negativeLength = _.filter(statements, function(s) { return s.category === 'disagree'; }).length;
-    $scope.neutralLength = _.filter(statements, function(s) { return s.category === 'neutral'; }).length;
-    $scope.positiveLength = _.filter(statements, function(s) { return s.category === 'agree'; }).length;
+    $scope.negativeLength = _.filter(statements, function (s) {
+        return s.category === 'disagree';
+    }).length;
+    $scope.neutralLength = _.filter(statements, function (s) {
+        return s.category === 'neutral';
+    }).length;
+    $scope.positiveLength = _.filter(statements, function (s) {
+        return s.category === 'agree';
+    }).length;
 
     $scope.date = new Date();
     $scope.totalDuration = Math.round(Duration[0] + Duration[1] + Duration[2] + Duration[3] + Duration[4]);
 
-    $scope.isInput = function(formElement) {
+    $scope.isInput = function (formElement) {
         return (formElement.type == 'input');
     };
 
     $timeout(window.print, 200);
 }])
 
-.controller('ThanksCtrl', [function() {
-}])
+.controller('ThanksCtrl', [function () {}])
 
-.service('MessageModal', ['$modal', function($modal) {
+.service('MessageModal', ['$modal', function ($modal) {
     return {
-        show: function(messageHead, message, textAlign, ok) {
+        show: function (messageHead, message, textAlign, ok) {
             return modalInstance = $modal.open({
                 templateUrl: 'templates/modal.html',
                 controller: 'ModalInstanceCtrl',
                 backdrop: 'static',
                 resolve: {
-                    messageHead: [function() {
+                    messageHead: [function () {
                         return messageHead;
                     }],
                     message: [function () {
                         return message;
                     }],
-                    ok: [function() {
+                    ok: [function () {
                         return ok;
                     }],
-                    textAlign: [function() {
+                    textAlign: [function () {
                         return textAlign;
                     }]
                 }
@@ -1339,6 +1403,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
         }
     };
 }])
+
 
 .controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'messageHead', 'message', 'ok', 'textAlign', function ($scope, $modalInstance, messageHead, message, ok, textAlign) {
     $scope.messageHead = messageHead;
@@ -1350,17 +1415,17 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     };
 }])
 
-.filter('escape', [function() {
+.filter('escape', [function () {
     return encodeURI;
 }])
 
-.run(['$rootScope', '$modalStack', '$log', '$state', function($rootScope, $modalStack, $log, $state) {
-    $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+.run(['$rootScope', '$modalStack', '$log', '$state', function ($rootScope, $modalStack, $log, $state) {
+    $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
         $log.error("" + error + " occured while navigating to " + toState + " with params: " + toParams);
         $state.go('error');
     });
 
-    $rootScope.goToNextPage = function(config, currentStep) {
+    $rootScope.goToNextPage = function (config, currentStep) {
         if (currentStep < 3 && config.showStep3 === 'true') {
             $state.go('root.step3');
         } else if (currentStep < 4 && config.showStep4 === 'true') {
@@ -1373,7 +1438,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap'])
     };
 
     var firstRequest = true;
-    $rootScope.$on('$stateChangeStart', function(event) {
+    $rootScope.$on('$stateChangeStart', function (event) {
         var top = $modalStack.getTop();
         if (top) {
             $modalStack.dismiss(top.key);
