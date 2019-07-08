@@ -1,5 +1,5 @@
 ## Easy HtmlQ
-A minor change to HtmlQ to allow it to work with Firebase
+A minor change to HtmlQ to allow it to work with Firebase. For attribution, please cite the original authors of HtmlQ (HtmlQ information below)
 
 ## HtmlQ
 
