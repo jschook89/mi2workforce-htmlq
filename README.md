@@ -1,7 +1,7 @@
-This is Version 2 of the Easy HTMLQ software. If you need the Version 1 files for compatibility reasons, the files are here: [(legacy version)](https://github.com/shawnbanasick/easy-htmlq-legacy) . 
+If you need the Version 1 files for compatibility reasons, the files are here: [(legacy version)](https://github.com/shawnbanasick/easy-htmlq-legacy) . 
 
 
-# Easy HtmlQ
+# Easy HtmlQ Version 2
 
 Pre-Sorting
 <p align="center">
