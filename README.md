@@ -1,7 +1,8 @@
+This is Version 2 of the Easy HTMLQ software. If you need the Version 1 files for compatibility reasons, the files are here: [(legacy version)](https://github.com/shawnbanasick/easy-htmlq-legacy) . 
+
+
 # Easy HtmlQ
 A minor change to HtmlQ to allow it to work with Firebase. For attribution, please cite the original HtmlQ software and authors (see HtmlQ information below).
-
-
 
 ## HtmlQ
 
