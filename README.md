@@ -3,6 +3,10 @@ If you need the Version 1 files for compatibility reasons, the files are here: [
 
 # Easy HtmlQ Version 2
 
+
+## To set-up an Easy HtmlQ project use [EQ-Configurator](https://github.com/shawnbanasick/eq_configurator)
+
+
 Pre-Sorting
 <p align="center">
 <img src="https://github.com/shawnbanasick/easy-htmlq/blob/master/readme_assets/eq-presort.png" width="500" />
@@ -23,9 +27,6 @@ Survey Questions
 <p align="center">
 <img src="https://github.com/shawnbanasick/easy-htmlq/blob/master/readme_assets/eq-survey.png" width="500" />
 <p>
-
-## To set-up an Easy HtmlQ project use [EQ-Configurator](https://github.com/shawnbanasick/eq_configurator)
-
 
 ## Project Access 
 Starting with version 2.0.0 there are now four project access options. 
