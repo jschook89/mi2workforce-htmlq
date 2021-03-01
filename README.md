@@ -24,19 +24,18 @@ Survey Questions
 <img src="https://github.com/shawnbanasick/easy-htmlq/blob/master/readme_assets/eq-survey.png" width="500" />
 <p>
 
-## Getting started
-
-Once you're ready to start the survey:
-
-## Settings
+## To set-up an Easy HtmlQ project use [EQ-Configurator](https://github.com/shawnbanasick/eq_configurator)
 
 
-### Additional settings (vs. FlashQ)
+## Project Access 
+Starting with version 2.0.0 there are now four project access options. 
+* Open and anonymous - anyone with the url for the project can access it, no participant id information
+* Open with participant ids - If you send out unique links Easy HtmlQ will automatically fill in the participant id (uid). Use this format: [https://www.yourdomain.com/htmlq/#/?userCode=USERCODE](). In the results file, the user code will show up in the UID field. 
+* Restricted and anonymous - only those with the project access code can do the Q sort. The access code is the same for all participants
+* Restricted and participant name input required - participants requred to enter the access code and a name before they can start the Q sort.
 
 
-## Creating unique participation links (UID)
 
-If you want to send out unique links to a HtmlQ survey that will automatically fill in the UID/user code, you can create links in the following format: [https://www.yourdomain.com/htmlq/#/?userCode=USERCODE](). In the resulting CSV file, the user code will show up in the UID field. This allows you to identify participants without requiring them to log in.
 
 ## License
 
