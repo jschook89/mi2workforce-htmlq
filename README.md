@@ -2,23 +2,24 @@ This is Version 2 of the Easy HTMLQ software. If you need the Version 1 files fo
 
 
 # Easy HtmlQ
-A minor change to HtmlQ to allow it to work with Firebase. For attribution, please cite the original HtmlQ software and authors (see HtmlQ information below).
 
+Pre-Sorting
 <p align="center">
 <img src="https://github.com/shawnbanasick/easy-htmlq/blob/master/readme_assets/eq-presort.png" width="500" />
 <p>
   
-  
+Responsive Sorting Grid
 <p align="center">
-<img src="https://github.com/shawnbanasick/easy-htmlq/blob/master/readme_assets/eq-card-comments" width="500" />
+<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/eq-soring.png" width="500" />
 <p>
   
-  
+
+Card Comments
 <p align="center">
-<img src="https://github.com/shawnbanasick/easy-htmlq/blob/master/readme_assets/eq-sorting.png" width="500" />
+<img src="https://github.com/shawnbanasick/easy-htmlq/blob/master/readme_assets/eq-card-comments.png" width="500" />
 <p>
   
-  
+Survey Questions  
 <p align="center">
 <img src="https://github.com/shawnbanasick/easy-htmlq/blob/master/readme_assets/eq-survey.png" width="500" />
 <p>
