@@ -4,6 +4,10 @@ This is Version 2 of the Easy HTMLQ software. If you need the Version 1 files fo
 # Easy HtmlQ
 A minor change to HtmlQ to allow it to work with Firebase. For attribution, please cite the original HtmlQ software and authors (see HtmlQ information below).
 
+<p align="center">
+<img src="https://github.com/shawnbanasick/kade/blob/master/gifs/kade_overview_1-2-0.gif" width="500" />
+<p>
+
 ## Getting started
 
 Once you're ready to start the survey:
