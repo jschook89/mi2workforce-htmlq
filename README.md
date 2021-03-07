@@ -4,8 +4,6 @@ If you need the Version 1 files for compatibility reasons, the files are here: [
 # Easy HtmlQ Version 2
 
 
-## To set-up an Easy HtmlQ project use [EQ-Configurator](https://github.com/shawnbanasick/eq_configurator)
-
 ## Try the [demo project](https://shawnbanasick.github.io/easy-htmlq/#/)
 
 Pre-Sorting
