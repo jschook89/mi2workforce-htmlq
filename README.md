@@ -3,8 +3,9 @@ If you need the Version 1 files for compatibility reasons, the files are here: [
 
 # Easy HtmlQ Version 2 ([download](https://github.com/shawnbanasick/easy-htmlq/archive/v2.0.1.zip))
 
+## Use the [EQ Configurator](https://github.com/shawnbanasick/eq_configurator) to set up an Easy HtmlQ project
 
-## Try the [demo project](https://shawnbanasick.github.io/easy-htmlq/#/)
+## For a preview, try the [demo project](https://shawnbanasick.github.io/easy-htmlq/#/)
 
 Pre-Sorting
 <p align="center">
