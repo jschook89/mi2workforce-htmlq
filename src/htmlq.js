@@ -454,6 +454,31 @@ angular
         }
       }
 
+      // insert text font size control functions
+      angular.element(document).ready(function () {
+        // Increase Font Size
+        $(".increase").click(function () {
+          var currentSize = $(".fontAdjust").css("font-size");
+          var newSize = parseFloat(currentSize) + 1;
+          $(".fontAdjust").css("font-size", newSize);
+          return false;
+        });
+
+        // Decrease Font Size
+        $(".decrease").click(function () {
+          // var currentFontSize = $(".fontAdjust").css("font-size");
+          var currentSize = $(".fontAdjust").css("font-size");
+          var newSize = parseFloat(currentSize) - 1;
+          if (newSize < 6) {
+            newSize = 6;
+          }
+          $(".fontAdjust").css("font-size", newSize);
+          return false;
+        });
+      });
+
+      $(".showFontAdjust").hide();
+
       // initialize survey
       var doc = $.parseXML(configXml);
       var form = null;
@@ -1056,6 +1081,17 @@ angular
                 return;
               }
 
+              // to prevent error when 2 drop zones highlighted during drop
+              var previousTimeStamp = localStorage.getItem("previousTimeStamp");
+              if (Math.trunc(event.timeStamp) === +previousTimeStamp) {
+                $log.info("cancelled");
+                return;
+              }
+              localStorage.setItem(
+                "previousTimeStamp",
+                Math.trunc(event.timeStamp)
+              );
+
               var dragElement = angular
                 .element(ui.draggable.get())
                 .isolateScope();
@@ -1166,6 +1202,8 @@ angular
     "$scope",
     "$state",
     function (config, language, UserCode, $http, $scope, $state) {
+      $(".showFontAdjust").hide();
+
       $scope.showNameInput = config.partNameRequired;
       $scope.user = {};
 
@@ -1276,6 +1314,8 @@ angular
       $scope,
       $state
     ) {
+      $(".showFontAdjust").hide();
+
       $scope.help = function () {
         MessageModal.show(
           messageHead,
@@ -1401,6 +1441,8 @@ angular
       $rootScope,
       $state
     ) {
+      $(".showFontAdjust").show();
+
       $scope.help = function () {
         MessageModal.show(
           messageHead,
@@ -1483,6 +1525,8 @@ angular
       $rootScope,
       $state
     ) {
+      $(".showFontAdjust").show();
+
       $scope.help = function () {
         MessageModal.show(
           messageHead,
@@ -1542,6 +1586,8 @@ angular
       $rootScope,
       $state
     ) {
+      $(".showFontAdjust").hide();
+
       $scope.help = function () {
         MessageModal.show(
           messageHead,
@@ -1602,6 +1648,8 @@ angular
       $rootScope,
       $state
     ) {
+      $(".showFontAdjust").hide();
+
       $scope.help = function () {
         MessageModal.show(
           messageHead,
@@ -1706,6 +1754,8 @@ angular
       $stateParams,
       $log
     ) {
+      $(".showFontAdjust").hide();
+
       function makeSortString(sortedStatements) {
         var sorted = [];
         for (var i = 0; i < sortedStatements.length; i++) {

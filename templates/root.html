@@ -1,8 +1,8 @@
 <div class="container step1" ng-style="{width: viewWidth}">
   <div class="row">
-    <!-- <div class="col-xs-4"><img src="logo.jpg" class="img-responsive"/></div>
-        <div class="col-xs-4"><img src="logo_center.jpg" class="img-responsive"/></div>
-        <div class="col-xs-4"><img src="logo_right.jpg" class="img-responsive"/></div> -->
+    <!-- <div class="col-xs-2"><img src="logo.jpg" class="img-responsive"/></div>
+    <div class="col-xs-2"><img src="logo_center.jpg" class="img-responsive"/></div>
+    <div class="col-xs-2"><img src="logo_right.jpg" class="img-responsive"/></div> -->
   </div>
   <div ui-view=""></div>
 </div>
@@ -10,7 +10,7 @@
 <footer class="footer">
   <div class="container" ng-style="{width: viewWidth}">
     <div class="row">
-      <div class="col-xs-4">
+      <div class="col-xs-3">
         <a ng-if="debug" ng-click="next()" class="btn btn-default">Next</a>
         <a
           ng-if="!(config.disableBackButton === 'true') && canGoBack()"
@@ -19,6 +19,14 @@
           ng-bind-html="language.backButton"
           class="btn btn-default"
         ></a>
+      </div>
+      
+      <div class="col-xs-2">
+        <div class="showFontAdjust">
+          <button class="btn btn-default decrease"> - </button>
+          <span>Text</span>
+          <button class="btn btn-default increase">+</button>
+        </div>
       </div>
 
       <div class="col-xs-4">
@@ -35,7 +43,7 @@
         </div>
       </div>
 
-      <div class="col-xs-4">
+      <div class="col-xs-3">
         <a
           ng-if="hasHelp()"
           ng-click="help()"

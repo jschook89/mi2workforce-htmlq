@@ -142,6 +142,16 @@ pre-sort stack at bottom of step #1 (see above for gray container)
   padding: 0;
 }
 
+#step2 .sorted-statements .sortable {
+  height: 115px;
+  background-color: white;
+  border: 1px solid;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 0;
+}
+
+
 /* styles for disagree-neutral-agree pre-sort stack at bottom of sort page
    step #1 custom height
 -------------------------------------------------- */

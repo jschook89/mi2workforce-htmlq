@@ -13,13 +13,14 @@
       <div
         ng-if="element.type == 'note' && element.bg"
         class="row question-note"
+        style="margin-top: 20px;"
         ng-class="{textright: textAlignRight}"
         ng-bind-html="element.text"
       ></div>
       <div
         ng-if="element.type == 'note' && !element.bg"
         class="row question-note"
-        style="background-color: transparent"
+        style="background-color: transparent; margin-top: 20px;"
         ng-class="{textright: textAlignRight}"
         ng-bind-html="element.text"
       ></div>
