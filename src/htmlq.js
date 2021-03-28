@@ -1796,13 +1796,23 @@ angular
         };
 
         if (config.partId === null || config.partId === undefined) {
-          config.partId = "";
+          config.partId = "---";
         }
-        ret.participantId = config.partId;
+        ret.userInputId = config.partId;
 
-        if (UserCode.userCode && UserCode.userCode.length > 0) {
-          ret.uid = UserCode.userCode;
+        if ($scope.urlId && $scope.urlId.length > 0) {
+          console.log($scope.urlId);
+          ret.urlUserCode = $scope.urlId;
+        } else {
+          ret.urlUserCode = "---";
         }
+
+        if (config.loginPassword && config.loginPassword.length > 0) {
+          ret.accessCode = config.loginPassword;
+        } else {
+          ret.accessCode = "---";
+        }
+
         for (var i = 0; i < SortedStatements.grid[0].length; i++) {
           var statement = SortedStatements.grid[0][i].statement;
           ret["comment" + statement._id] =
