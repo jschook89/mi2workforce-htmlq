@@ -394,6 +394,19 @@ angular
       $scope.configXml = configXml;
       $scope.duration = Duration;
 
+      function getURLParameter(name) {
+        return (
+          decodeURIComponent(
+            (new RegExp("[?|&]" + name + "=" + "([^&;]+?)(&|#|;|$)").exec(
+              location.search
+            ) || [, ""])[1].replace(/\+/g, "%20")
+          ) || null
+        );
+      }
+
+      const urlId = getURLParameter("userCode");
+      $scope.urlId = urlId;
+
       var isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
 
       var viewHeight = window.innerHeight - 300;
