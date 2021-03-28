@@ -1,7 +1,7 @@
 If you need the Version 1 files for compatibility reasons, the files are here: [(legacy version)](https://github.com/shawnbanasick/easy-htmlq-legacy) . 
 
 
-# Easy HtmlQ Version 2 ([download](https://github.com/shawnbanasick/easy-htmlq/archive/v2.0.1.zip))
+# Easy HtmlQ Version 2 ([download](https://github.com/shawnbanasick/easy-htmlq/archive/v2.0.2.zip))
 
 ## Use the [EQ Configurator](https://github.com/shawnbanasick/eq_configurator) to set up an Easy HtmlQ project
 
