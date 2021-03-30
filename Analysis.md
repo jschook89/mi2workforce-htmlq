@@ -102,7 +102,7 @@ The third question (column "form2") is a "radio" type question while the fourth 
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/select_iPads.png" width="500" />
 <p>
 
-These two type report answers using zero-based numbering system. For the demo results in the image below, the first participant checked the first answer "Freshman" ("0") and selected the first answer "Global Studies" ("0") for these two questions
+These two type report answers using zero-based numbering system. For the demo results in the image below, the first participant checked the first answer "Freshman" (numbered "0") and selected the first answer "Global Studies" (numbered "0") for these two questions.
 
 <p align="center">
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/form2-form3.png" width="200" />
