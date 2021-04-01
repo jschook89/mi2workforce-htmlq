@@ -12,7 +12,7 @@
 
 ### 2a.
 
-### To view and analyze the JSON data you will need to import it into analysis software such as [KADE](https://github.com/shawnbanasick/kade) or the qmethod R package. If you use KADE, the next step is to click "Import", "JSON", and "Load JSON file" as shown in the image below.
+### To view and analyze the JSON data you will need to import it into analysis software such as [KADE](https://github.com/shawnbanasick/kade) (version 1.2.1 or later) or the qmethod R package. If you use KADE, the next step is to click "Import", "JSON", and "Load JSON file" as shown in the image below.
 
 <p align="center">
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/kade-import-json.png" width="500" />
