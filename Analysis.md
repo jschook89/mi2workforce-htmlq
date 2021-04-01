@@ -34,7 +34,7 @@
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/click-download-data.png" width="500" />
 <p>
 
-## Interpretation of Easy HtmlQ Common Data
+## Interpretation of Easy HtmlQ Common Data (Version 2.0.2 and later)
 
 <hr/>
 
@@ -88,52 +88,73 @@
 
 <hr/>
 
-### If you have included Step 5 (post-Q sort questionnaire) the results will be reported together in a set of columns. The questions all have the prefix "form", and are numbered using a [zero-based numbering system](https://en.wikipedia.org/wiki/Zero-based_numbering). In other words, it starts by labelling the first question with 0, so the column name is "form0", for the second question the column is "form1", and so on.
+### If you have included Step 5 (post-Q sort questionnaire) the results will be reported together in a set of columns with the prefix "form". Unfortunately, they are confusingly numbered using a [zero-based numbering system](https://en.wikipedia.org/wiki/Zero-based_numbering). In other words, it starts by designating the first question with 0, so the results column label is "form0", for the second question the column label is "form1", and so on.
 
 <p align="center">
+<b>Demo Project Form Results</b> <br/>
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/form-results.png" width="600" />
 <p>
 
-### In the demo, the first and second qeuestions (in the results file column "form0" and "form1") are text input questions, so their interpretation is straightforward.
-
-### The third question (column "form2") is a "radio" type question while the fourth question (column "form3") is a drop-down "select" type question. These two types of question use a similar method for reporting results.
+### In the demo, the first and second questions (in the results file columns "form0" and "form1") are text input questions, so their interpretation is straightforward. The "form0" is the year of birth, and the column for the second question of the survey labelled "form1" has short text answers about the class.
 
 <p align="center">
-<b>Radio Type Question</b> <br/>
-<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/radio_ipad.png" width="500" />
+<b>Text-Type Question and Textarea-Type Question Results</b> <br/>
+<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/form1-form2.png" width="300" />
+<p>
+
+### The third question (column labelled "form2") is a "radio" type question while the fourth question (column labelled "form3") is a drop-down "select" type question. These two types of question both use zero-based numbering to report their results.
+
+<p align="center">
+<b>Demo Survey "form2" - Radio-Type Question</b> <br/>
+<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/radio_ipad.png" width="700" />
 <p>
 
 <p align="center">
-<b>Select Type Question</b> <br/>
-<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/select_iPads.png" width="500" />
+<b>Demo Survey "form3" - Select-Type Question</b> <br/>
+<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/select_iPads.png" width="900" />
 <p>
 
-### These two type report answers using zero-based numbering system. For the demo results in the image below, the first participant checked the first answer "Freshman" (numbered "0") and selected the first answer "Global Studies" (numbered "0") for these two questions. The second participant selected "Sophomore" and "Linguistics", which are both the second choice in the questions, so in the results these are reported as number "1". The third participant selected "Junior" and "English Literature" in the survey (both 3rd listed choice in the survey questions), so their results are "2" for both.
+### For the demo survey results shown below, the first participant checked the first answer "Freshman" (numbered "0") and selected the third answer "English Literature" (numbered "2") for these two questions. The second participant selected "Junior" and "Global Studies", so in their results these are reported as number "2" and "0". The third participant selected "Sophomore" and "English Literature" in the survey, so their results are "1" and "2".
 
 <p align="center">
+<b>Radio-Type and Select-Type Question Results</b> <br/>
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/form2-form3.png" width="200" />
 <p>
 
-### form results
+### The "form4" results are for a checkbox-type question. Unlike the previous radio- and select-type questions above which forced participants to select a single answer, this question type allows for multiple multiple answers. Answers that are checked are reported as "1", while un-checked answers are reported as "0". In this example, the first participant checked the first two options ("Lecture" and "Group Discussion"), the second participant checked all the options, and the third participant checked only the last option ("Active Learning").
 
 <p align="center">
-<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/form-results.png" width="600" />
+<b>Demo Survey "form4" - Checkbox-Type Question</b> <br/>
+<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/checkbox_ipad.png" width="700" />
 <p>
-
-### scale 2 question
 
 <p align="center">
-<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/scale2_multi_binary.png" width="500" />
+<b>Checkbox-Type Question Results</b> <br/>
+<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/form4.png" width="100" />
 <p>
 
-### scale 5 question
+### The last three questions on the demo survey are scale-type questions. Unlike the previous questions, the scale-type question results do NOT use the zero-based numbering system. The scale2- (usually a yes-no binary), scale5 and scale10-type questions just report the number of the selection made by the participant.
 
 <p align="center">
-<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/scale5_multiple.png" width="500" />
+<b>Demo Survey "form5" - Scale2 Type Question</b> <br/>
+<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/scale2_multi_binary.png" width="850" />
 <p>
-
-### scale 10 question
 
 <p align="center">
-<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/scale10_multiple.png" width="500" />
+<b>Demo Survey "form6" - Scale5 Type Question</b> <br/>
+<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/scale5_multiple.png" width="850" />
 <p>
+
+<p align="center">
+<b>Demo Survey "form7" - Scale10 Type Question</b> <br/>
+<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/scale10_multiple.png" width="850" />
+<p>
+
+### For the example answers from the demo project, the first participant answered "No" to the statement "I have used an iPad in class before." and "Yes" to "I have used a notebook in class before". The second participant answered "No" to both questions, while the third participant answered "Yes" to both statements.
+
+<p align="center">
+<b>Scale-Type Question Results</b> <br/>
+<img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/form5-form6-form7.png" width="300" />
+<p>
+
+### For "form6", the first participant
