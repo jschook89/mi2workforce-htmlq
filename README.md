@@ -35,7 +35,7 @@ Starting with version 2.0.2 there are now four project access options.
 * Restricted and anonymous - only those with the project access code can do the Q sort. The access code is the same for all participants
 * Restricted and participant name input required - participants requred to enter the access code and their name before they can start the Q sort.
 
-## Click [Here](analysis.md) to View Information on the Analysis and Interpretation of Easy HtmlQ Data
+## Click [Here](Analysis.md) to View Information on the Analysis and Interpretation of Easy HtmlQ Data
 
 
 
