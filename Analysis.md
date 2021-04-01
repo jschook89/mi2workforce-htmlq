@@ -34,6 +34,10 @@
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/click-download-data.png" width="500" />
 <p>
 
+<br />
+<br />
+<br />
+
 ## Interpretation of Easy HtmlQ Data Common to All Projects (Version 2.0.2 and later)
 
 
@@ -73,6 +77,10 @@
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/cell-based-sorts.png" width="400" />
 <p>
 
+<br />
+<br />
+<br />
+
 ## Interpretation of Optional Step 4 Data
 
 
@@ -81,6 +89,10 @@
 <p align="center">
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/plus4-minus4-comments.png" width="700" />
 <p>
+
+<br />
+<br />
+<br />
 
 ## Interpretation of Optional Step 5 Data
 
