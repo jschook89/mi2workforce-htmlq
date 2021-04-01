@@ -34,7 +34,7 @@
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/click-download-data.png" width="500" />
 <p>
 
-## Interpretation of Easy HtmlQ Common Data (Version 2.0.2 and later)
+## Interpretation of Easy HtmlQ Data Common to All Projects (Version 2.0.2 and later)
 
 <hr/>
 
@@ -74,21 +74,21 @@
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/cell-based-sorts.png" width="400" />
 <p>
 
-## Interpretation of Step 4 Data
+## Interpretation of Optional Step 4 Data
 
 <hr/>
 
-### If you have included Step 4 (comments for the highest and lowest ranked cards), there will be columns that contain the comments for each statement. Each statement gets one column, so depending on how your participants do the Q sorts, there could be many comment columns in your project results CSV file.
+### If you have included Step 4 (comments for the highest and lowest ranked cards) in your project, there will be columns that contain the comments for each statement. Each statement gets one column, so depending on how your participants do the Q sorts, there could be many comment columns in your project results CSV file.
 
 <p align="center">
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/plus4-minus4-comments.png" width="700" />
 <p>
 
-## Interpretation of Step 5 Data
+## Interpretation of Optional Step 5 Data
 
 <hr/>
 
-### If you have included Step 5 (post-Q sort questionnaire) the results will be reported together in a set of columns with the prefix "form". Unfortunately, they are confusingly numbered using a [zero-based numbering system](https://en.wikipedia.org/wiki/Zero-based_numbering). In other words, it starts by designating the first question with 0, so the results column label is "form0", for the second question the column label is "form1", and so on.
+### If you have included Step 5 (post-Q sort questionnaire) the results will be reported together in a set of columns with the prefix "form". Unfortunately, they are confusingly numbered using a [zero-based numbering system](https://en.wikipedia.org/wiki/Zero-based_numbering). In other words, it starts by designating the first question with 0, so the results column its label is "form0". For the second question the column label is "form1", and so on.
 
 <p align="center">
 <b>Demo Project Form Results</b> <br/>
@@ -133,28 +133,32 @@
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/form4.png" width="100" />
 <p>
 
-### The last three questions on the demo survey are scale-type questions. Unlike the previous questions, the scale-type question results do NOT use the zero-based numbering system. The scale2- (usually a yes-no binary), scale5 and scale10-type questions just report the number of the selection made by the participant.
+### The last three questions on the demo survey are the scale questions. Unlike the previous radio- and select-type questions, the scale question results do **NOT** use the zero-based numbering system to report the participant's responses. The scale2- (usually a yes-no binary), scale5 and scale10-type questions just report the number of the selection made by the participant.
 
 <p align="center">
-<b>Demo Survey "form5" - Scale2 Type Question</b> <br/>
+<b>Demo Survey "form5" - Scale2-Type Question</b> <br/>
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/scale2_multi_binary.png" width="850" />
 <p>
 
 <p align="center">
-<b>Demo Survey "form6" - Scale5 Type Question</b> <br/>
+<b>Demo Survey "form6" - Scale5-Type Question</b> <br/>
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/scale5_multiple.png" width="850" />
 <p>
 
 <p align="center">
-<b>Demo Survey "form7" - Scale10 Type Question</b> <br/>
+<b>Demo Survey "form7" - Scale10-Type Question</b> <br/>
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/scale10_multiple.png" width="850" />
 <p>
 
 ### For the example answers from the demo project, the first participant answered "No" to the statement "I have used an iPad in class before." and "Yes" to "I have used a notebook in class before". The second participant answered "No" to both questions, while the third participant answered "Yes" to both statements.
 
 <p align="center">
-<b>Scale-Type Question Results</b> <br/>
+<b>Scale Question Results</b> <br/>
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/form5-form6-form7.png" width="300" />
 <p>
 
-### For "form6", the first participant
+### In a similar fashion, the scale5 and scale10 question results report the number that was chosen by the participants in a straightforward manner. For example, in "form6", the first participant choose "3" for the question "How would you rate the use of iPads in this class?", and "4" for the question "How would you rate this class overall?".
+
+<br/>
+
+### Finally, for "form7" the first participant answered "5" for the question "How would your rate the use of the Socrative website in this class?", and "2" for the question "How would your rate the use of the Quizlet website for this class?".
