@@ -28,7 +28,7 @@
 
 ### 2c.
 
-### After selecting the participant ID variable, you will be able to click the "Download JSON data as CSV" button and export all of the Firebase data.
+### After selecting the participant ID variable, you can upload a text file with your statements and continue the analysis of the Q sort data in KADE. If you want to examine the other results data, you can click the "Download JSON data as CSV" button and export the rest of the project data from Firebase.
 
 <p align="center">
 <img src="https://github.com/shawnbanasick/easy-htmlq/raw/master/readme_assets/click-download-data.png" width="500" />
