@@ -394,6 +394,13 @@ angular
       $scope.configXml = configXml;
       $scope.duration = Duration;
 
+      // error catching for addition of font size button label to language file
+      // due to eq configurator version change
+      var fontSizeButtonText = language.step2TextSizeLabel;
+      if (fontSizeButtonText === undefined || fontSizeButtonText === null) {
+        $scope.language.step2TextSizeLabel = $sce.trustAsHtml("Text");
+      }
+
       function getURLParameter(name) {
         return (
           decodeURIComponent(
@@ -1887,6 +1894,7 @@ angular
       }
 
       function submitViaFirebase() {
+        $scope.buttonClicked = true;
         var results = makeParamsObject();
 
         for (var i in results) {
@@ -1912,6 +1920,7 @@ angular
             });
           })
           .catch((error) => {
+            $scope.buttonClicked = false;
             var errorCode = error.code;
             var errorMessage = error.message;
             // ...
