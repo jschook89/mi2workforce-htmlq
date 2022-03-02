@@ -2,7 +2,7 @@
 <img src="https://github.com/shawnbanasick/easy-htmlq/blob/master/readme_assets/deprecation-message.png" width="800" />
 <p>
 
-### EQ Web Sort
+# EQ Web Sort
 
 [EQ Web Sort Homepage](https://github.com/shawnbanasick/eq-web-sort)
 
@@ -14,11 +14,11 @@
   <br />
   <br />
 
-# (Legacy) Easy HtmlQ Version 2 ([download](https://github.com/shawnbanasick/easy-htmlq/archive/v2.0.3.zip))
+### (Legacy) Easy HtmlQ Version 2 ([download](https://github.com/shawnbanasick/easy-htmlq/archive/v2.0.3.zip))
 
-## Use the [EQ Configurator](https://github.com/shawnbanasick/eq_configurator) to set up an Easy HtmlQ project. It includes step-by-step visual guides showing how to link to an (free) online database and how to upload the files to a (free) web host.
+### Use the [EQ Configurator](https://github.com/shawnbanasick/eq_configurator) to set up an Easy HtmlQ project. It includes step-by-step visual guides showing how to link to an (free) online database and how to upload the files to a (free) web host.
 
-## For a preview, try the [demo project](https://shawnbanasick.github.io/easy-htmlq/#/)
+### For a preview, try the [demo project](https://shawnbanasick.github.io/easy-htmlq/#/)
 
 Pre-Sorting
 
