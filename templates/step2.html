@@ -15,10 +15,10 @@
                 ng-bind-html="language.btnDisagreement"
               ></span>
               <div class="tableLableCenterTextDiv">
-                <span class="tableLableCenterText"
-                ng-bind-html="language.step2CondOfInstruc"  
-                ></span
-                >
+                <span
+                  class="tableLableCenterText"
+                  ng-bind-html="language.step2CondOfInstruc"
+                ></span>
               </div>
               <span
                 style="float: right; text-align: right"
@@ -40,6 +40,7 @@
             <td
               class="col-xs-1"
               ng-repeat="col in sortedStatements.grid"
+              id="col-{{$index}}"
               ng-style="{width: viewWidth/map.column.length}"
             >
               <div
@@ -48,6 +49,7 @@
                 on-received-statement-from-categories="removeStatement($statement)"
                 dynamically-create-initial-statement="true"
                 ng-repeat="cell in col"
+                id="cell-{{$index}}"
                 class="cell fontAdjust"
                 style="line-height: 1.1"
                 helper-width="{{ viewWidth/map.column.length }}"

@@ -80,8 +80,12 @@ li.draggable {
   background-color: gray;
 }
 
-.droppable-active.occupied {
-  background-color: red;
+.droppable-active-occupied {
+  background-color: red !important;
+}
+
+.droppable {
+  background-color: yellow;
 }
 
 p.card-counter {
@@ -150,7 +154,6 @@ pre-sort stack at bottom of step #1 (see above for gray container)
   overflow-y: scroll;
   padding: 0;
 }
-
 
 /* styles for disagree-neutral-agree pre-sort stack at bottom of sort page
    step #1 custom height
@@ -475,12 +478,14 @@ li.disagree {
 /* draggable helper */
 .draggable.dragging-onto-grid {
   border: 1px solid;
-  width: 100px;
-  height: 70px;
+  width: 120px;
+  height: 100px;
   padding: 2px;
   font-size: 1em;
+  line-height: 1em;
   box-shadow: 10px 10px 5px #888888;
   display: block;
+  z-index: 10000;
 }
 
 .draggable.dragging-onto-grid.small-font {
@@ -589,6 +594,12 @@ body {
   overflow: hidden;
 }
 
+#step2 {
+  /* z-index: 0;
+  position: relative;
+  overflow: visible; */
+}
+
 .userNameDiv {
   margin-top: 25px;
   margin-bottom: 25px;
@@ -599,4 +610,3 @@ body {
 body.modal-open {
   overflow: auto;
 }
-  

@@ -4,6 +4,10 @@
  License: MIT
 */
 
+var locationArray = [];
+localStorage.setItem("locationArray", JSON.stringify(locationArray));
+localStorage.setItem("noDrop", JSON.stringify(false));
+
 function xml2json(xml) {
   var x2js = new X2JS();
   var json = x2js.xml_str2json(xml);
@@ -530,9 +534,8 @@ angular
             el.text = $sce.trustAsHtml(formElements[i].firstChild.nodeValue);
           } else if (formElements[i].nodeName === "input") {
             el.type = "input";
-            el.inputType = formElements[i].attributes.getNamedItem(
-              "type"
-            ).value;
+            el.inputType =
+              formElements[i].attributes.getNamedItem("type").value;
             el.scale = formElements[i].attributes.getNamedItem("scale")
               ? formElements[i].attributes
                   .getNamedItem("scale")
@@ -615,7 +618,7 @@ angular
           }
         }
 
-        // statements in grid are rated
+        // statements in grid are counted
         for (var i = 0; i < inGrid.length; i++) {
           if (inGrid[i]) {
             current++;
@@ -913,14 +916,53 @@ angular
             appendTo: "#step2",
             stack: ".draggable, .swappable",
             revert: function (dropTarget) {
+              console.log("revert");
+              console.log($(dropTarget));
+              // prevents return animation when dropped on background
               if ($(dropTarget).attr("id") === "step2") return false;
+
+              //  prevents ?? center homing behavior ?? if card already present
               if (!$(dropTarget).hasClass("cell")) return true;
-              var statementOnDroppable = angular.element(dropTarget).scope()
-                .cell.statement;
-              var isOccupiedByAnotherStatement =
-                statementOnDroppable &&
-                statementOnDroppable._id !== scope.initialStatement._id;
-              return isOccupiedByAnotherStatement;
+
+              // var statementOnDroppable = angular.element(dropTarget).scope()
+              //   .cell.statement;
+
+              // var storedStatement = JSON.parse(
+              //   localStorage.getItem("storedStatement")
+              // );
+
+              // if (scope.cell) {
+              //   scope.cell.statement = storedStatement;
+              // }
+
+              // localStorage.setItem("storedStatement", "");
+
+              let noDrop = localStorage.getItem("noDrop");
+              if (noDrop === "true") {
+                let lastLocation = localStorage.getItem("lastLocation");
+
+                let locationArray = JSON.parse(
+                  localStorage.getItem("locationArray")
+                );
+
+                console.log(lastLocation);
+
+                locationArray.push(lastLocation);
+
+                localStorage.setItem(
+                  "locationArray",
+                  JSON.stringify(locationArray)
+                );
+
+                console.log(
+                  "revert draggable: ",
+                  JSON.stringify(locationArray, null, 2)
+                );
+
+                return true;
+              } else {
+                return false;
+              }
             },
             cursorAt: {
               top: 35,
@@ -962,7 +1004,56 @@ angular
 
           $(element).draggable({
             stack: ".swappable, .draggable",
-            revert: "invalid",
+            revert: function (dropTarget) {
+              let noDrop = localStorage.getItem("noDrop");
+              if (noDrop === "true") {
+                var storedStatement = JSON.parse(
+                  localStorage.getItem("storedStatement")
+                );
+
+                if (scope.cell) {
+                  scope.cell.statement = storedStatement;
+                }
+
+                localStorage.setItem("storedStatement", "");
+
+                let lastLocation = localStorage.getItem("lastLocation");
+                let locationArray = JSON.parse(
+                  localStorage.getItem("locationArray")
+                );
+
+                locationArray.push(lastLocation);
+
+                localStorage.setItem(
+                  "locationArray",
+                  JSON.stringify(locationArray)
+                );
+
+                console.log("revert: ", JSON.stringify(locationArray, null, 2));
+
+                return true;
+              } else {
+                return false;
+              }
+
+              // if (dropTarget[0].firstChild !== null) {
+              //   return true;
+              // }
+              // console.log("revert 2");
+              // console.log("dropTarget innertext: ", dropTarget[0].innerText);
+              // console.log("dropTarget first child: ", dropTarget[0].firstChild);
+              // [0].innerText;
+              // var statementOnDroppable = angular.element(dropTarget).scope().cell.statement;
+              // console.log(statementOnDroppable);
+              // console.log("in droppable id: ", statementOnDroppable._id);
+              // console.log(scope.initialStatement._id);
+              // console.log(scope.cell.statement._id);
+              // var isOccupiedByAnotherStatement =
+              //   statementOnDroppable &&
+              //   statementOnDroppable._id !== scope.initialStatement._id;
+              // console.log(isOccupiedByAnotherStatement);
+              // return isOccupiedByAnotherStatement;
+            },
             start: function (event, ui) {
               $log.info("DRAG START EVENT");
 
@@ -971,10 +1062,20 @@ angular
 
               // DRAG OUT OF CELL
               scope.$apply(function () {
+                // console.log(scope.cell.statement);
                 if (scope.cell) {
+                  if (scope.cell.statement) {
+                    localStorage.setItem(
+                      "storedStatement",
+                      JSON.stringify(scope.cell.statement)
+                    );
+                  }
                   scope.cell.statement = null;
                 }
               });
+            },
+            stop: function (event, ui) {
+              console.log("stop function for swappable");
             },
           });
 
@@ -1044,6 +1145,12 @@ angular
 
               // prevent memory leaks in IE:
               ui.draggable.removeProp("startPos");
+
+              //
+              var dragElement = angular
+                .element(ui.draggable.get())
+                .isolateScope();
+              console.log(dragElement.initialStatement);
             },
           });
         },
@@ -1090,21 +1197,85 @@ angular
             addStatementDiv(element.scope());
           }
 
+          console.log($(this).find(".swappable").length);
+
           $(element).droppable({
             hoverClass: "droppable-active",
             greedy: true,
+
+            over: function (event, ui) {
+              console.log("cell id", $(this).attr("id"));
+              console.log("parent id", $(this).parent().attr("id"));
+
+              var cellId = $(this).attr("id");
+              var colId = $(this).parent().attr("id");
+              var location = colId + cellId;
+
+              var locationArray = JSON.parse(
+                localStorage.getItem("locationArray")
+              );
+
+              var occupied = locationArray.includes(location);
+              //localStorage.setItem("occupied", true);
+
+              console.log(occupied);
+
+              if (occupied === true) {
+                localStorage.setItem("noDrop", "true");
+              } else {
+                localStorage.setItem("noDrop", "false");
+
+                locationArray.push(location);
+                localStorage.setItem(
+                  "locationArray",
+                  JSON.stringify(locationArray)
+                );
+              }
+              console.log(
+                "droppable over",
+                JSON.stringify(locationArray, null, 2)
+              );
+            },
+
+            out: function (event, ui) {
+              console.log("out");
+              var cellId = $(this).attr("id");
+              var colId = $(this).parent().attr("id");
+              var location = colId + cellId;
+
+              localStorage.setItem("lastLocation", location);
+
+              var locationArray = JSON.parse(
+                localStorage.getItem("locationArray")
+              );
+
+              console.log(JSON.stringify(locationArray));
+
+              locationArray = locationArray.filter((item) => item !== location);
+
+              localStorage.setItem(
+                "locationArray",
+                JSON.stringify(locationArray)
+              );
+              console.log(
+                "droppable out:",
+                JSON.stringify(locationArray, null, 2)
+              );
+            },
+
             drop: function (event, ui) {
+              // $(".cell").removeClass("droppable-active-occupied");
+              $(".cell").removeClass("droppable-active-occupied");
+              // $(this).droppable("disable");
+
               $log.info("DROP EVENT");
               // don't accept if we're already occupied
-              if (scope.cell.statement) {
-                $log.info("cancelled");
-                return;
-              }
+              // console.log($(this).find(".swappable").length);
 
               // to prevent error when 2 drop zones highlighted during drop
               var previousTimeStamp = localStorage.getItem("previousTimeStamp");
               if (Math.trunc(event.timeStamp) === +previousTimeStamp) {
-                $log.info("cancelled");
+                $log.info("cancelled2");
                 return;
               }
               localStorage.setItem(
@@ -1119,12 +1290,13 @@ angular
               // to prevent error when 2 drop zones highlighted during drop
               if (dragElement === undefined) {
                 ui.draggable.remove();
-                $log.info("cancelled");
+                $log.info("cancelled3");
                 return;
               }
 
               // we're empty, add dragged statement to cell
               scope.$apply(function () {
+                console.log("added to empty cell");
                 // set statement in cell
                 scope.cell.statement = dragElement.initialStatement;
 
@@ -1145,6 +1317,7 @@ angular
               // if the dragged statement was a draggable and not a swappable, add a div that can be dragged around in the grid.
               if (ui.draggable.attr("draggable-statement")) {
                 scope.$apply(function () {
+                  console.log("added draggable not swappable");
                   addStatementDiv(element.scope(), true);
                   scope.onReceivedStatementFromCategories({
                     $statement: dragElement.initialStatement,
@@ -1156,6 +1329,20 @@ angular
               if (ui.draggable.hasClass("destroy-on-place")) {
                 ui.draggable.remove();
               }
+
+              var dragElement = angular
+                .element(ui.draggable.get())
+                .isolateScope();
+              console.log(dragElement);
+
+              var locationArray = JSON.parse(
+                localStorage.getItem("locationArray")
+              );
+
+              console.log(
+                "drop event:",
+                JSON.stringify(locationArray, null, 2)
+              );
             },
           });
         },
@@ -1174,6 +1361,9 @@ angular
         },
         link: function (scope, element, attrs) {
           $(element).droppable({
+            // prevent drop on background to eliminate shift off-screen error
+            accept: ".swappable",
+            // disabled: true,
             drop: function (event, ui) {
               $log.info("DROP ON BG EVENT");
               var dragElement = angular
@@ -2184,6 +2374,6 @@ angular
         }
       });
 
-      $rootScope.debug = false;
+      $rootScope.debug = true;
     },
   ]);
